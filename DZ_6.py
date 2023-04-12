@@ -4,6 +4,7 @@ import pathlib
 import shutil
 import patoolib
 import tempfile
+import sys
 
 
 def normalize(filename):
@@ -60,12 +61,15 @@ dict_folders = {
     'other': []         
 }
 
-source_folder = pathlib.Path(r'd:\testfolder')
+if __name__ == "__main__":
 
-for folder_name in dict_folders.keys():
-    folder_path = pathlib.Path(folder_name)
-    folder_path.mkdir(exist_ok=True)
+    source_folder = pathlib.Path(sys.argv[1])
 
-for file_path in source_folder.glob('**/*'):
-    if file_path.is_file():
-        move(file_path)
+    for folder_name in dict_folders.keys():
+        folder_path = pathlib.Path(folder_name)
+        folder_path.mkdir(exist_ok=True)
+
+    for file_path in source_folder.glob('**/*'):
+        if file_path.is_file():
+            move(file_path)
+
